@@ -1,0 +1,26 @@
+{
+  "name": "stone_challenge",
+  "version": "1.0.0",
+  "description": "Murta doing the stone QA challenge",
+  "main": "index.js",
+  "scripts": {
+    "cypress": "npx cypress run",
+    "cypress:open": "npx cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmurta/Stone.git"
+  },
+  "keywords": [
+    "stone"
+  ],
+  "author": "Bruno Murta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bmurta/Stone/issues"
+  },
+  "homepage": "https://github.com/bmurta/Stone#readme",
+  "dependencies": {
+    "cypress": "^3.4.1"
+  }
+}
