@@ -26,24 +26,28 @@ describe("Verificar o saldo", () => {
       }
     }).then(response => {
       Cypress.env("id", response.body[0].id);
+      Cypress.env("account", response.body[0].account_code);
     });
   });
-  it("Verifica o saldo", () => {
+  it("Faz a transferencia", () => {
     console.log(Cypress.env("id"));
     cy.request({
-        method: "GET",
-        url: "https://sandbox-api.openbank.stone.com.br/api/v1/accounts/" + Cypress.env("id") + "/balance",
-        form: true,
-        headers: {
-          authorization: "Bearer " + Cypress.env("token")
+      method: "POST",
+      url:
+        "https://sandbox-api.openbank.stone.com.br/api/v1/dry_run/internal_transfers",
+      form: true,
+      headers: {
+        authorization: "Bearer " + Cypress.env("token")
+      },
+      body: {
+        "amount":1,
+        "account_id": Cypress.env("id"),
+        target: {
+          account: {
+            account_code: "307942"
+          }
         }
-      }).then(response => {
-          if (response.body.balance === 0) {
-              cy.log("To pobre, mandem dinheiro!")
-          }
-          else {
-              cy.log("To bem rico")
-          }
-      })
+      }
+    });
   });
 });
