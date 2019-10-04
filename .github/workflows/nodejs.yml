@@ -20,20 +20,8 @@ jobs:
       env:
         CI: true
 
-    - name: Upload artifact Balance
+    - name: Upload artifacts
       uses: actions/upload-artifact@master
       with:
-        name: checkbalance.js.mp4
-        path: /home/runner/work/Stone/Stone/cypress/videos/checkbalance.js.mp4
-
-    - name: Upload artifact Statment
-      uses: actions/upload-artifact@master
-      with:
-        name: checkStatement.js.mp4
-        path: /home/runner/work/Stone/Stone/cypress/videos/checkStatement.js.mp4
-
-    - name: Upload artifact Transfer
-      uses: actions/upload-artifact@master
-      with:
-        name: makeTransfer.js.mp4
-        path: /home/runner/work/Stone/Stone/cypress/videos/makeTransfer.js.mp4
+        name: [checkbalance.js.mp4, checkStatement.js.mp4, makeTransfer.js.mp4]
+        path: /home/runner/work/Stone/Stone/cypress/videos/
