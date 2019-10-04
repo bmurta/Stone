@@ -3,17 +3,37 @@ name: Node CI
 on: [push]
 
 jobs:
-  test:
+  Test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+
     - name: Use Node.js 10
       uses: actions/setup-node@v1
       with:
         node-version: '10'
+
     - name: Run Cypress
       run: |
         npm install
         npm run cypress
       env:
         CI: true
+
+    - name: Upload artifact Balance
+      uses: actions/upload-artifact@master
+      with:
+        name: checkbalance.js.mp4
+        path: /home/runner/work/Stone/Stone/cypress/videos/checkbalance.js.mp4
+
+    - name: Upload artifact Statment
+      uses: actions/upload-artifact@master
+      with:
+        name: checkStatement.js.mp4
+        path: /home/runner/work/Stone/Stone/cypress/videos/checkStatement.js.mp4
+
+    - name: Upload artifact Transfer
+      uses: actions/upload-artifact@master
+      with:
+        name: makeTransfer.js.mp4
+        path: /home/runner/work/Stone/Stone/cypress/videos/makeTransfer.js.mp4
