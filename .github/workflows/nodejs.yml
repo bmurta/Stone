@@ -9,14 +9,14 @@ jobs:
 
     strategy:
       matrix:
-        node-version: 10
+        node-version: 10.x
 
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: 10
+        node-version: 10.x
     - name: npm install, run cypress
       run: |
         npm install
