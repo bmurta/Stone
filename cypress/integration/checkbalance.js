@@ -30,21 +30,28 @@ describe("Verificar o saldo", () => {
   });
   it("Verifica o saldo", () => {
     cy.request({
-        method: "GET",
-        url: "https://sandbox-api.openbank.stone.com.br/api/v1/accounts/" + Cypress.env("id") + "/balance",
-        form: true,
-        headers: {
-          authorization: "Bearer " + Cypress.env("token")
-        }
-      }).then(response => {
-          if (response.body.balance === 0) {
-              cy.log("To pobre, mandem dinheiro!")
-          }
-          else {
-              cy.log("To bem rico")
-          }
-          expect(response.status).to.equal(200)
-          assert.isNotNull(response.body.balance && response.body.blocked_balance && response.body.scheduled_balance) 
-      })
+      method: "GET",
+      url:
+        "https://sandbox-api.openbank.stone.com.br/api/v1/accounts/" +
+        Cypress.env("id") +
+        "/balance",
+      form: true,
+      headers: {
+        authorization: "Bearer " + Cypress.env("token")
+      }
+    }).then(response => {
+      if (response.body.balance === 0) {
+        cy.log("To pobre :(");
+      } else {
+        cy.log("To rico :)");
+      }
+      expect(response.duration).to.lte(1000);
+      expect(response.status).to.equal(200);
+      assert.isNotNull(
+        response.body.balance &&
+          response.body.blocked_balance &&
+          response.body.scheduled_balance
+      );
+    });
   });
 });

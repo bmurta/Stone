@@ -30,24 +30,31 @@ describe("Verificar o saldo", () => {
     });
   });
   it("Faz a transferencia", () => {
-    console.log(Cypress.env("id"));
-    cy.request({
-      method: "POST",
-      url:
-        "https://sandbox-api.openbank.stone.com.br/api/v1/dry_run/internal_transfers",
-      form: true,
-      headers: {
-        authorization: "Bearer " + Cypress.env("token")
-      },
-      body: {
-        "amount":1,
-        "account_id": Cypress.env("id"),
-        target: {
-          account: {
-            account_code: "307942"
+    const value = 30
+    cy.request(
+      {
+        method: "POST",
+        url:
+          "https://sandbox-api.openbank.stone.com.br/api/v1/dry_run/internal_transfers",
+        form: true,
+        headers: {
+          authorization: "Bearer " + Cypress.env("token")
+        },
+        body: {
+          amount: value,
+          account_id: Cypress.env("id"),
+          target: {
+            account: {
+              account_code: "307942"
+            }
           }
         }
       }
-    });
+    ).then(response => {
+      expect(response.duration).to.lte(1000);
+      expect(response.status).to.equal(202);
+      expect(response.body.amount).to.equal(value)
+      expect(response.body.target_account_owner_name).to.equal("Victor Nascimento")
+    })
   });
 });

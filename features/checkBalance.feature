@@ -7,6 +7,7 @@ Funcionalidade: Consultar Saldo
         E armazene o valor do meu Bearer Token
         E eu armazene o valor do meu ID de usuário
         Quando eu fizer um request do tipo GET no endpoint balance, passando meu ID e Bearer Token
-        Então a API deve retornar uma responsta de status 200
+        Então a API deve retornar uma resposta em ao menos 1 segundo
+        E a resposta deve possuir status 200
         E retornar os campos balance, blocked_balance e scheduled_balance
         E estes campos devem possuir valor
