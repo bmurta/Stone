@@ -29,7 +29,6 @@ describe("Verificar o saldo", () => {
     });
   });
   it("Verifica o saldo", () => {
-    console.log(Cypress.env("id"));
     cy.request({
         method: "GET",
         url: "https://sandbox-api.openbank.stone.com.br/api/v1/accounts/" + Cypress.env("id") + "/balance",
@@ -44,6 +43,8 @@ describe("Verificar o saldo", () => {
           else {
               cy.log("To bem rico")
           }
+          expect(response.status).to.equal(200)
+          assert.isNotNull(response.body.balance && response.body.blocked_balance && response.body.scheduled_balance) 
       })
   });
 });
